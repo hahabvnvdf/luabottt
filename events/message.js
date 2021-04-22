@@ -58,9 +58,10 @@ module.exports = async (client, message) => {
 
         const query = message.content.toLowerCase();
         if (!query) {
-            setTimeout (function () {
-                message.channel.send('❌❌❌');
-            }, 20 * 1000);
+            console.log("hello")
+            // setTimeout (function () {
+            //     message.channel.send('❌❌❌');
+            // }, 20 * 1000);
         }
         if (noituLastUser == message.author.id) return errnoitu(message, 'Bạn đã nối từ trước đó rồi, vui lòng chờ!');
         if (!verifyWord(query) || query.length == 1) return errnoitu(message, `Từ \`${message.content}\` không tồn tại trong từ điển của bot!`);
