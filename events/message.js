@@ -55,10 +55,13 @@ module.exports = async (client, message) => {
     }
     // noitu
     if (isInChannel(message, serverData, noitu, 'noichu')) {
-        setTimeout (function () {
-            message.channel.send('❌❌❌');
-        }, 20 * 1000);
+
         const query = message.content.toLowerCase();
+        if (!query) {
+            setTimeout (function () {
+                message.channel.send('❌❌❌');
+            }, 20 * 1000);
+        }
         if (noituLastUser == message.author.id) return errnoitu(message, 'Bạn đã nối từ trước đó rồi, vui lòng chờ!');
         if (!verifyWord(query) || query.length == 1) return errnoitu(message, `Từ \`${message.content}\` không tồn tại trong từ điển của bot!`);
         if (!noituStart) await db.set(`${guildID}.noituStart`, true);
