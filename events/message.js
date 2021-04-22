@@ -55,8 +55,8 @@ module.exports = async (client, message) => {
     }
     // noitu
     if (isInChannel(message, serverData, noitu, 'noichu')) {
-        setInterval (function () {
-            message.reply('❌❌❌');
+        setTimeout (function () {
+            message.channel.send('❌❌❌');
         }, 20 * 1000);
         const query = message.content.toLowerCase();
         if (noituLastUser == message.author.id) return errnoitu(message, 'Bạn đã nối từ trước đó rồi, vui lòng chờ!');
