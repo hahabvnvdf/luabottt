@@ -25,7 +25,7 @@ module.exports = async (client, message) => {
         message.author.send('✅|Bạn vừa nhận được 50000 Agent!\nCảm ơn bạn đã ủng hộ bot!').catch(() => null);
     }
     let serverData = await db.get(guildID);
-    if (!serverData) serverData = await db.set(message.guild.id, { prefix: TYPE_RUN == 'production' ? "_" : "*", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi', noitu: null, noituStart: false, noituArray: [], maxWords: 1500, noituLastUser: null, rankChannel: 'default' });
+    if (!serverData) serverData = await db.set(message.guild.id, { prefix: TYPE_RUN == 'production' ? "_" : ",", logchannel: null, msgcount: true, defaulttts: null, botdangnoi: false, aiChannel: null, msgChannelOff: [], blacklist: false, aiLang: 'vi', noitu: null, noituStart: false, noituArray: [], maxWords: 1500, noituLastUser: null, rankChannel: 'default' });
     const { msgChannelOff, aiChannel, aiLang, noitu, noituStart, noituArray, maxWords, noituLastUser, rankChannel } = serverData;
     if (!maxWords) await updateNoiTu(message.guild.id);
     if (!msgChannelOff) await db.set(`${message.guild.id}.msgChannelOff`, []);
@@ -55,6 +55,9 @@ module.exports = async (client, message) => {
     }
     // noitu
     if (isInChannel(message, serverData, noitu, 'noichu')) {
+        setInterval (function () {
+            message.reply('❌❌❌');
+        }, 20 * 1000);
         const query = message.content.toLowerCase();
         if (noituLastUser == message.author.id) return errnoitu(message, 'Bạn đã nối từ trước đó rồi, vui lòng chờ!');
         if (!verifyWord(query) || query.length == 1) return errnoitu(message, `Từ \`${message.content}\` không tồn tại trong từ điển của bot!`);
