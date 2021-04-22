@@ -57,7 +57,7 @@ module.exports = async (client, message) => {
     if (isInChannel(message, serverData, noitu, 'noichu')) {
 
         const query = message.content.toLowerCase();
-        if (!query) {
+        if (query == "") {
             console.log("hello")
             // setTimeout (function () {
             //     message.channel.send('❌❌❌');
