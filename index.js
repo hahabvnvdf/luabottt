@@ -1,20 +1,14 @@
 const { ShardingManager } = require('discord.js');
 require("dotenv").config();
-const { TOKEN, TOPGG } = process.env;
+const { TOKEN } = process.env;
 const { laysodep } = require('./functions/utils');
 const db = require('quick.db');
-const AutoPoster = require('topgg-autoposter');
 const manager = new ShardingManager('./bot.js', {
     totalShards: 'auto',
     token: TOKEN,
 });
 
 manager.spawn().then(async () => {
-    const poster = AutoPoster(TOPGG, manager);
-
-    poster.on('posted', () => {
-        console.log('Posted stats to top.gg');
-    });
     let guildCount = await getGuildCount();
     manager.broadcastEval(`this.user.setPresence({ status: "online", activity: { name: 'Đang phục vụ ${laysodep(guildCount)} servers', type: 'PLAYING' } })`);
     setInterval(async () => {
