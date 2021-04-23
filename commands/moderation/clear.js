@@ -22,7 +22,7 @@ module.exports = {
         const amount = !isNaN(args[0]) ? parseInt(args[0]) : parseInt(args[1]);
         if (!amount) return message.reply('Vui lòng nhập số lượng tin nhắn để xoá.');
         if (amount < 1) return message.reply('Vui lòng nhập số lớn hơn 1.');
-        if (amount > 100) return message.reply('Vui lòng nhập số nhỏ hơn 100.');
+        if (amount > 1000) return message.reply('Vui lòng nhập số nhỏ hơn 1000.');
         if (!user) {
             message.channel.bulkDelete(amount, true).then(delmsg => {
                 message.channel.send(`Đã xoá \`${delmsg.size}\` tin nhắn!`).then(m => m.delete({ timeout: 5000 }));
@@ -34,7 +34,7 @@ module.exports = {
             });
         } else {
             message.channel.messages.fetch({
-                limit: 100,
+                limit: 1000,
             }).then(messages => {
                 messages = messages.filter(m => m.author.id === user.id).array().slice(0, amount);
                 message.channel.bulkDelete(messages, true).then(delmsg => {
